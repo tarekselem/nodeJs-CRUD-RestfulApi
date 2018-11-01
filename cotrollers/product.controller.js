@@ -7,7 +7,7 @@ exports.product_details = (req, res) => {
     });
 }
 
-exports.product_create = function (req, res) {
+exports.product_create = (req, res) => {
     let product = new Product ( 
         {
             name: req.body.name,
