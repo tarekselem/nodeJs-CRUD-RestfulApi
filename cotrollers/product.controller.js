@@ -24,6 +24,18 @@ exports.product_create = function (req, res) {
     });
 };
 
-exports.test = function (req, res) {
-    res.send('hiiiiii');
+exports.product_update = (req, res) => {
+ Product.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, product) => {
+    if (err) return next(err);
+    
+    res.send('product updated.');
+ });
+};
+
+exports.product_delete = (req, res) => {
+    Product.findByIdAndRemove(req.params.id, (err) => {
+        if (err) return next(err);
+
+        res.send('Deleted Successfully');
+    });
 };
