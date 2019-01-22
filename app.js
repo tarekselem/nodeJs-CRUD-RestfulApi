@@ -4,6 +4,20 @@ const bodyParser = require('body-parser');
 const product = require('./routes/product.route');
 const app = express();
 
+// Logging configurations
+const logger = require('./shared/logger');
+const expressWinston = require('express-winston');
+
+app.use(expressWinston.logger({
+    transports: [logger],
+    meta: false,
+    msg: `{{req.ip}} - {{res.statusCode}} - {{req.method}} - {{res.responseTime}}ms - {{req.url}} - {{req.headers['user-agent']}}`,
+    expressFormat: false,
+    colorize: true
+}));
+
+logger.log('info','system is up!');
+
 // Set up mongoose connection
 const mongoose = require('mongoose');
 let dev_db_url = 'mongodb://admin:admin123@ds147213.mlab.com:47213/productsdb';
